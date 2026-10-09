@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Durães Fotografia | Casamentos, 15 anos e aniversários</title>
-<meta name="description" content="Fotografia e filmagem de casamentos, casamentos civis, 15 anos e aniversários infantis. Durães Fotografia — eternizando momentos.">
-<meta property="og:title" content="Durães Fotografia">
-<meta property="og:description" content="Queremos emocioná-los contando a história do dia mais importante das suas vidas.">
+<title>Portfólio | Durães Fotografia</title>
+<meta name="description" content="Portfólio da Durães Fotografia: casamentos, casamentos civis, ensaios, 15 anos, aniversários infantis e eventos.">
+<meta property="og:title" content="Portfólio | Durães Fotografia">
+<meta property="og:description" content="Casamentos, 15 anos, aniversários e eventos eternizados pela Durães Fotografia.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600&family=Pinyon+Script&display=swap" rel="stylesheet">
@@ -149,130 +149,123 @@ footer{background:#111;color:rgba(255,255,255,.6);text-align:center;padding:26px
 .rv{opacity:0;transform:translateY(24px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1)}
 .rv.in{opacity:1;transform:none}
 @media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}.slides img{transition:opacity .01s}html{scroll-behavior:auto}}
+
+/* ---- portfólio ---- */
+.nav .back{display:inline-flex;align-items:center;gap:8px;text-decoration:none;font-size:.82rem;letter-spacing:.14em;text-transform:uppercase;opacity:.85;min-height:44px}
+.nav .back:hover{opacity:1}
+.nav .back svg{width:18px;height:18px}
+.p-hero{position:relative;min-height:min(78svh,760px);display:grid;place-items:center;text-align:center;color:#fff;overflow:hidden;background:#111}
+.p-hero .strip{position:absolute;inset:0;display:grid;grid-template-columns:repeat(3,1fr)}
+.p-hero .strip img{width:100%;height:100%;object-fit:cover;filter:brightness(.38) saturate(.85)}
+@media (max-width:640px){.p-hero .strip{grid-template-columns:1fr}.p-hero .strip img:nth-child(n+2){display:none}}
+.p-hero .in{position:relative;padding:120px 20px 70px;display:grid;gap:14px;justify-items:center;max-width:720px}
+.p-hero h1{font-size:clamp(4rem,15vw,8rem);line-height:.95;text-shadow:0 2px 30px rgba(0,0,0,.35)}
+.p-hero p{margin:0;font-weight:300;opacity:.92;max-width:44ch}
+.chapters{display:grid;gap:14px;grid-template-columns:repeat(2,1fr)}
+@media (min-width:760px){.chapters{grid-template-columns:repeat(3,1fr);gap:18px}}
+.chap{position:relative;border:0;padding:0;border-radius:20px;overflow:hidden;aspect-ratio:4/5;cursor:pointer;color:#fff;background:#111;isolation:isolate;text-align:left;font:inherit}
+.chap img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;transition:transform .8s ease}
+.chap::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,transparent 40%,rgba(20,18,15,.85))}
+.chap:hover img{transform:scale(1.06)}
+.chap .t{position:absolute;left:16px;right:16px;bottom:14px;display:grid;gap:2px}
+.chap b{font-family:var(--script);font-weight:400;font-size:clamp(1.7rem,5.6vw,2.6rem);line-height:1.05;overflow-wrap:anywhere}
+.chap .t>span{font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;opacity:.85}
+.bar{position:sticky;top:calc(72px + env(safe-area-inset-top,0px));z-index:30;background:rgba(251,250,247,.94);background:color-mix(in srgb,var(--paper) 92%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line);padding:12px 0;margin-bottom:28px}
+.bar .filters{margin:0}
+.count{text-align:center;color:var(--muted);font-size:.88rem;margin:-10px 0 22px}
+.lb .cap{position:absolute;left:50%;bottom:calc(18px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);color:#fff;font-size:.85rem;letter-spacing:.12em;text-transform:uppercase;opacity:.8;white-space:nowrap}
 </style>
 </head>
 <body>
 <div id="app"></div>
 <script>
 /* ===========================================================
-   CONFIGURAÇÃO DO SITE — DURÃES FOTOGRAFIA
-   As fotos vêm do repositório das propostas (propostas/img).
-   Se o nome dele mudar, troque BASE.
+   PORTFÓLIO — DURÃES FOTOGRAFIA
+   Para adicionar fotos: coloque o arquivo na pasta img do
+   repositório "propostas" e acrescente o nome (sem .jpg) na
+   categoria certa abaixo. Foto que não existir é escondida.
    =========================================================== */
 var SITE = {
   BASE: "/propostas/",
   WHATSAPP: "19992460216",
   INSTAGRAM: "duraesfotografiax",
-  FACEBOOK: "duraesfotografiax",
-  PORTFOLIO: "portfolio.html",   // página de portfólio do próprio site
-  CAPA: ["party", "q_hero", "w_a", "i_a", "hero"],
-  SERVICOS: [
-    { nome: "Casamento", foto: "w_c", texto: "Cerimônia, festa, making of e filmagem dos melhores momentos." },
-    { nome: "Casamento civil", foto: "civ_b", texto: "A cobertura do cartório com todo o carinho que esse dia merece." },
-    { nome: "15 anos", foto: "q_a", texto: "Making of da debutante e a festa completa, do jeito que ela sonhou." },
-    { nome: "Aniversário infantil", foto: "i_c", texto: "Cada sorriso e cada descoberta da festa, para reviver sempre." }
-  ],
-  PORTFOLIO_FOTOS: [
-    ["w_a", "Casamento"], ["q_a", "15 anos"], ["civ_a", "Civil"], ["i_a", "Infantil"], ["m_b", "Casamento"], ["pre_a", "Ensaios"],
-    ["q_g", "15 anos"], ["w_b", "Casamento"], ["civ_d", "Civil"], ["i_c", "Infantil"], ["q_b", "15 anos"], ["bride", "Casamento"],
-    ["pre_b", "Ensaios"], ["m_d", "Casamento"], ["q_n", "15 anos"], ["civ_c", "Civil"], ["i_d", "Infantil"], ["w_d", "Casamento"],
-    ["q_e", "15 anos"], ["m_a", "Casamento"], ["q_h", "15 anos"], ["i_e", "Infantil"], ["pre_c", "Ensaios"], ["m_e", "Casamento"],
-    ["q_i", "15 anos"], ["civ_e", "Civil"], ["q_k", "15 anos"], ["w_c", "Casamento"], ["i_b", "Infantil"], ["q_f", "15 anos"]
+  CAPA: ["w_a", "q_hero", "i_a"],
+  CATEGORIAS: [
+    { nome: "Casamento", capa: "w_c", fotos: ["w_a", "m_b", "w_b", "bride", "m_a", "w_c", "m_d", "w_d", "hands", "m_c", "m_e", "pro_quote", "hero", "party", "couple"] },
+    { nome: "Casamento civil", capa: "civ_b", fotos: ["civ_a", "civ_d", "civ_b", "civ_quote", "civ_c", "civ_e"] },
+    { nome: "Ensaios", capa: "pre_a", fotos: ["pre_a", "pre_b", "pre_c"] },
+    { nome: "15 anos", capa: "q_a", fotos: ["q_hero", "q_a", "q_g", "q_b", "q_n", "q_d", "q_f", "q_c", "q_h", "q_e", "q_i", "q_k", "q_l", "q_j", "q_o"] },
+    { nome: "Aniversário infantil", capa: "i_c", fotos: ["i_a", "i_c", "i_d", "i_b", "i_e"] },
+    { nome: "Eventos", capa: "e_palco", fotos: ["e_palco", "e_formatura", "e_amigas", "e_cantora", "e_bateria", "e_homenagem", "e_show", "e_bar", "e_baixo", "e_teclado", "e_musico", "e_banda"] }
   ]
 };
 (function () {
   function A(p) { return (window.__ASSETS ? window.__ASSETS[p] : SITE.BASE + p) || ""; }
   function F(k) { return A("img/" + k + (k === "logo" ? ".png" : ".jpg")); }
   function esc(s) { return String(s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
-  function wa(msg) { return "https://wa.me/55" + SITE.WHATSAPP + "?text=" + encodeURIComponent(msg); }
-  var WA_GERAL = wa("Olá! Vim pelo site da Durães Fotografia e gostaria de um orçamento.");
+  var WA = "https://wa.me/55" + SITE.WHATSAPP + "?text=" + encodeURIComponent("Olá! Vi o portfólio da Durães Fotografia e gostaria de um orçamento.");
   var IC = {
     wa: '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.4.8 3.2.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3Z"/></svg>',
-    ig: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r="1" fill="currentColor" stroke="none"/></svg>',
-    fb: '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.5 21v-7.5h2.6l.4-3h-3V8.6c0-.9.3-1.5 1.5-1.5h1.6V4.4a21 21 0 0 0-2.3-.1c-2.3 0-3.9 1.4-3.9 4v2.2H7.8v3h2.6V21h3.1Z"/></svg>',
-    pf: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="3"/><circle cx="9" cy="10" r="2"/><path d="m21 16-5-5-8 9"/></svg>'
+    back: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>',
+    ig: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r="1" fill="currentColor" stroke="none"/></svg>'
   };
-  var cats = ["Todos"].concat(SITE.PORTFOLIO_FOTOS.map(function (f) { return f[1]; }).filter(function (c, i, a) { return a.indexOf(c) === i; }));
+  var todas = [];
+  SITE.CATEGORIAS.forEach(function (c) { c.fotos.forEach(function (k) { todas.push({ k: k, cat: c.nome }); }); });
+  /* intercala as categorias para o "Todos" ficar variado */
+  var mix = [], filas = SITE.CATEGORIAS.map(function (c) { return c.fotos.map(function (k) { return { k: k, cat: c.nome }; }); });
+  while (filas.some(function (f) { return f.length; })) filas.forEach(function (f) { if (f.length) mix.push(f.shift()); });
 
   document.getElementById("app").innerHTML =
-    '<header class="nav" id="nav"><div class="wrap in"><a href="#topo" aria-label="Durães Fotografia"><img class="logo" src="' + F("logo") + '" alt="Durães Fotografia"></a>' +
-    '<ul><li><a href="#servicos">Serviços</a></li><li><a href="portfolio.html">Portfólio</a></li><li><a href="#sobre">Sobre</a></li><li><a href="#contato">Contato</a></li></ul>' +
-    '<a class="btn" href="' + WA_GERAL + '" target="_blank" rel="noopener">Pedir orçamento</a></div></header>' +
-
-    '<main id="topo"><section class="hero"><div class="slides" id="slides">' + SITE.CAPA.map(function (k, i) { return '<img src="' + F(k) + '" alt=""' + (i === 0 ? ' class="on"' : "") + ">"; }).join("") + "</div>" +
-    '<div class="hero-in"><img class="logo" src="' + F("logo") + '" alt="Durães Fotografia"><div class="spaced">Fotografia e filmagem</div>' +
-    '<h1 class="script">Eternizando momentos</h1><p>Casamentos, casamentos civis, 15 anos e aniversários infantis contados com sensibilidade e cuidado em cada detalhe.</p>' +
-    '<div class="ctas"><a class="btn solid" href="' + WA_GERAL + '" target="_blank" rel="noopener">' + IC.wa + 'Pedir orçamento</a><a class="btn" href="#portfolio">Ver portfólio</a></div></div>' +
-    '<div class="dots" id="dots">' + SITE.CAPA.map(function (k, i) { return "<i" + (i === 0 ? ' class="on"' : "") + "></i>"; }).join("") + "</div></section>" +
-
-    '<section class="quote"><figure><img src="' + F("pro_quote") + '" alt="" loading="lazy"></figure><blockquote class="rv">Queremos emocioná-los contando a história do dia mais importante das suas vidas.</blockquote></section>' +
-
-    '<section class="sec" id="servicos"><div class="wrap"><div class="sec-head rv"><div class="spaced" style="color:var(--muted)">O que fazemos</div><h2 class="script">Nossos serviços</h2><p>Cada evento é único. Contamos a sua história do jeito que ela aconteceu, com fotos e vídeos entregues em alta resolução.</p></div><div class="services">' +
-    SITE.SERVICOS.map(function (s) {
-      return '<article class="svc rv"><img src="' + F(s.foto) + '" alt="' + esc(s.nome) + '" loading="lazy"><div class="in"><h3>' + esc(s.nome) + "</h3><p>" + esc(s.texto) + '</p><a class="btn" href="' + wa("Olá! Vim pelo site da Durães Fotografia e gostaria de um orçamento para " + s.nome.toLowerCase() + ".") + '" target="_blank" rel="noopener">Quero um orçamento</a></div></article>';
+    '<header class="nav" id="nav"><div class="wrap in"><a class="back" href="index.html">' + IC.back + 'Site</a>' +
+    '<a href="index.html" aria-label="Durães Fotografia"><img class="logo" src="' + F("logo") + '" alt="Durães Fotografia"></a>' +
+    '<a class="btn" href="' + WA + '" target="_blank" rel="noopener">Orçamento</a></div></header>' +
+    '<main><section class="p-hero"><div class="strip">' + SITE.CAPA.map(function (k) { return '<img src="' + F(k) + '" alt="">'; }).join("") + "</div>" +
+    '<div class="in"><div class="spaced">Durães Fotografia</div><h1 class="script">Portfólio</h1><p>Histórias reais que tivemos o privilégio de contar. Escolha uma categoria ou veja tudo.</p></div></section>' +
+    '<section class="sec" style="padding-bottom:40px"><div class="wrap"><div class="chapters">' +
+    SITE.CATEGORIAS.map(function (c) {
+      return '<button class="chap rv" type="button" data-go="' + esc(c.nome) + '"><img src="' + F(c.capa) + '" alt="" loading="lazy"><span class="t"><b>' + esc(c.nome) + "</b><span>" + c.fotos.length + " fotos</span></span></button>";
     }).join("") + "</div></div></section>" +
-
-    '<section class="sec" id="portfolio" style="padding-top:20px"><div class="wrap"><div class="sec-head rv"><div class="spaced" style="color:var(--muted)">Portfólio</div><h2 class="script">Nosso olhar</h2><p>Toque em uma foto para ver maior.</p></div>' +
-    '<div class="filters" role="group" aria-label="Filtrar fotos">' + cats.map(function (c, i) { return '<button type="button" data-cat="' + esc(c) + '" aria-pressed="' + (i === 0) + '">' + esc(c) + "</button>"; }).join("") + "</div>" +
-    '<div class="masonry">' + SITE.PORTFOLIO_FOTOS.map(function (f, i) { return '<button class="ph" type="button" data-cat="' + esc(f[1]) + '" data-i="' + i + '" aria-label="Ampliar foto de ' + esc(f[1]) + '"><img src="' + F(f[0]) + '" alt="Foto de ' + esc(f[1]) + ' pela Durães Fotografia" loading="lazy"></button>'; }).join("") + "</div>" +
-    (SITE.PORTFOLIO ? '<div style="text-align:center;margin-top:34px"><a class="btn dark" href="' + esc(SITE.PORTFOLIO) + '">Ver portfólio completo</a></div>' : "") + "</div></section>" +
-
-    '<section class="sec" id="sobre" style="background:var(--paper-2)"><div class="wrap about"><div class="txt rv"><div class="spaced" style="color:var(--muted)">Sobre nós</div><h2 class="script">Nossa equipe</h2>' +
-    "<p>Sou um fotógrafo profissional apaixonado por contar histórias através das minhas lentes. Junto com minha equipe, buscamos capturar momentos especiais e transformá-los em memórias duradouras.</p>" +
-    "<p>Com anos de experiência e habilidades diversificadas, trabalhamos de forma colaborativa para que cada projeto seja único, buscando a essência de cada ocasião e expressando-a artisticamente.</p></div>" +
-    '<div class="members rv">' + ["t1", "t2", "t3"].map(function (t) { return '<div class="member"><img src="' + F(t) + '" alt="Integrante da equipe Durães" loading="lazy"></div>'; }).join("") + "</div></div></section>" +
-
-    '<section class="sec partner"><div class="wrap"><div class="sec-head rv"><h2 class="script">Nossa parceria</h2><p>Durães Fotografia + Sttif Cerimonial</p></div>' +
-    '<div class="pcard rv"><figure><img src="' + F("cerimonialista") + '" alt="Equipe da Sttif Cerimonial com os noivos" loading="lazy"></figure><div class="t">' +
-    '<div class="pid"><img src="' + F("cerimonialista-logo") + '" alt="Logo Sttif Cerimonial"><div><b>Sttif Cerimonial</b><span>Cerimonial com Letícia Sttif</span></div></div>' +
-    "<p>Para o seu dia ser ainda mais leve, indicamos com carinho a equipe da Letícia. Enquanto vocês aproveitam, ela cuida do cronograma, dos fornecedores e da recepção dos convidados.</p>" +
-    '<a class="btn dark" href="https://wa.me/5519983436377?text=' + encodeURIComponent("Olá, Letícia! Vim pelo site da Durães Fotografia e gostaria de saber mais sobre o cerimonial.") + '" target="_blank" rel="noopener">' + IC.wa + "Falar com a Letícia</a></div></div></div></section>" +
-
-    '<section class="sec"><div class="wrap"><div class="testi rv"><div class="mark" aria-hidden="true">“</div><blockquote>Agradeço pelo seu trabalho e da equipe que se dedicou a noite toda registrando os momentos. Obrigada por fazer parte do meu sonho. Vocês foram incríveis!</blockquote><cite>Noiva atendida pela Durães Fotografia</cite></div></div></section>' +
-
-    '<section class="cta" id="contato"><img src="' + F("party") + '" alt=""><div class="wrap rv"><div class="spaced">Vamos conversar?</div><h2 class="script">Pronto para eternizar o seu grande dia?</h2>' +
+    '<section id="galeria" style="padding-bottom:90px"><div class="bar"><div class="wrap"><div class="filters" role="group" aria-label="Filtrar por categoria">' +
+    ["Todos"].concat(SITE.CATEGORIAS.map(function (c) { return c.nome; })).map(function (n, i) { return '<button type="button" data-cat="' + esc(n) + '" aria-pressed="' + (i === 0) + '">' + esc(n) + "</button>"; }).join("") +
+    '</div></div></div><div class="wrap"><p class="count" id="count" aria-live="polite"></p><div class="masonry" id="grid">' +
+    mix.map(function (f) { return '<button class="ph" type="button" data-cat="' + esc(f.cat) + '" aria-label="Ampliar foto de ' + esc(f.cat) + '"><img src="' + F(f.k) + '" alt="' + esc(f.cat) + ' pela Durães Fotografia" loading="lazy"></button>'; }).join("") +
+    "</div></div></section>" +
+    '<section class="cta"><img src="' + F("party") + '" alt=""><div class="wrap"><div class="spaced">Vamos conversar?</div><h2 class="script">A próxima história pode ser a sua</h2>' +
     "<p>Conte para a gente a data e o tipo do seu evento. Respondemos com uma proposta feita sob medida.</p>" +
-    '<div class="ctas"><a class="btn solid" href="' + WA_GERAL + '" target="_blank" rel="noopener">' + IC.wa + "Pedir orçamento no WhatsApp</a></div>" +
-    '<div class="socials"><a href="https://www.instagram.com/' + SITE.INSTAGRAM + '" target="_blank" rel="noopener">' + IC.ig + "@" + SITE.INSTAGRAM.toUpperCase() + "</a>" +
-    '<a href="https://www.facebook.com/' + SITE.FACEBOOK + '" target="_blank" rel="noopener">' + IC.fb + "/" + SITE.FACEBOOK.toUpperCase() + "</a>" +
-    (SITE.PORTFOLIO ? '<a href="' + esc(SITE.PORTFOLIO) + '">' + IC.pf + "PORTFÓLIO</a>" : "") + "</div></div></section></main>" +
+    '<div class="ctas"><a class="btn solid" href="' + WA + '" target="_blank" rel="noopener">' + IC.wa + 'Pedir orçamento no WhatsApp</a><a class="btn" href="index.html">Voltar ao site</a></div>' +
+    '<div class="socials"><a href="https://www.instagram.com/' + SITE.INSTAGRAM + '" target="_blank" rel="noopener">' + IC.ig + "@" + SITE.INSTAGRAM.toUpperCase() + "</a></div></div></section></main>" +
     "<footer>© " + new Date().getFullYear() + " Durães Fotografia · Eternizando momentos</footer>" +
-    '<a class="wa-fab" href="' + WA_GERAL + '" target="_blank" rel="noopener" aria-label="Falar no WhatsApp">' + IC.wa + "</a>" +
-    '<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Foto ampliada"><img id="lbi" alt=""><button class="x" type="button" aria-label="Fechar">&times;</button><button class="pv" type="button" aria-label="Foto anterior">&#8249;</button><button class="nx" type="button" aria-label="Próxima foto">&#8250;</button></div>';
+    '<a class="wa-fab" href="' + WA + '" target="_blank" rel="noopener" aria-label="Falar no WhatsApp">' + IC.wa + "</a>" +
+    '<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Foto ampliada"><img id="lbi" alt=""><button class="x" type="button" aria-label="Fechar">&times;</button><button class="pv" type="button" aria-label="Foto anterior">&#8249;</button><button class="nx" type="button" aria-label="Próxima foto">&#8250;</button><div class="cap" id="cap"></div></div>';
 
-  /* nav */
   var nav = document.getElementById("nav");
   function onScroll() { nav.classList.toggle("on", window.scrollY > 30); }
   window.addEventListener("scroll", onScroll, { passive: true }); onScroll();
 
-  /* capa em slides */
-  var sl = document.querySelectorAll("#slides img"), dt = document.querySelectorAll("#dots i"), cur = 0;
-  var reduz = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  if (sl.length > 1 && !reduz) setInterval(function () {
-    sl[cur].classList.remove("on"); dt[cur].classList.remove("on");
-    cur = (cur + 1) % sl.length; sl[cur].classList.add("on"); dt[cur].classList.add("on");
-  }, 5500);
-
-  /* revelar ao rolar */
   var rvs = document.querySelectorAll(".rv");
   if ("IntersectionObserver" in window) {
-    var io = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }); }, { threshold: 0.12 });
-    rvs.forEach(function (el, i) { el.style.transitionDelay = (i % 4) * 80 + "ms"; io.observe(el); });
+    var io = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }); }, { threshold: 0.1 });
+    rvs.forEach(function (el, i) { el.style.transitionDelay = (i % 3) * 80 + "ms"; io.observe(el); });
   } else rvs.forEach(function (el) { el.classList.add("in"); });
 
-  /* filtros */
   var fotos = Array.prototype.slice.call(document.querySelectorAll(".ph"));
-  document.querySelectorAll(".filters button").forEach(function (b) {
-    b.addEventListener("click", function () {
-      document.querySelectorAll(".filters button").forEach(function (x) { x.setAttribute("aria-pressed", String(x === b)); });
-      fotos.forEach(function (f) { f.hidden = !(b.dataset.cat === "Todos" || f.dataset.cat === b.dataset.cat); });
-    });
-  });
+  fotos.forEach(function (f) { f.querySelector("img").addEventListener("error", function () { f.remove(); fotos = fotos.filter(function (x) { return x !== f; }); contar(); }); });
+  var atual = "Todos";
+  function contar() { var n = visiveis().length; document.getElementById("count").textContent = n + (n === 1 ? " foto" : " fotos") + (atual === "Todos" ? "" : " · " + atual); }
+  function filtrar(cat) {
+    atual = cat;
+    document.querySelectorAll(".filters button").forEach(function (x) { x.setAttribute("aria-pressed", String(x.dataset.cat === cat)); });
+    fotos.forEach(function (f) { f.hidden = !(cat === "Todos" || f.dataset.cat === cat); });
+    contar();
+  }
+  document.querySelectorAll(".filters button").forEach(function (b) { b.addEventListener("click", function () { filtrar(b.dataset.cat); }); });
+  document.querySelectorAll(".chap").forEach(function (b) { b.addEventListener("click", function () { filtrar(b.dataset.go); document.getElementById("galeria").scrollIntoView({ behavior: "smooth" }); }); });
+  var h = decodeURIComponent((location.hash || "").slice(1));
+  filtrar(SITE.CATEGORIAS.some(function (c) { return c.nome === h; }) ? h : "Todos");
 
-  /* lightbox */
-  var lb = document.getElementById("lb"), lbi = document.getElementById("lbi"), idx = 0;
+  var lb = document.getElementById("lb"), lbi = document.getElementById("lbi"), cap = document.getElementById("cap"), idx = 0;
   function visiveis() { return fotos.filter(function (f) { return !f.hidden; }); }
-  function mostrar(i) { var v = visiveis(); if (!v.length) return; idx = (i + v.length) % v.length; lbi.src = v[idx].querySelector("img").src; }
+  function mostrar(i) { var v = visiveis(); if (!v.length) return; idx = (i + v.length) % v.length; lbi.src = v[idx].querySelector("img").src; cap.textContent = v[idx].dataset.cat + " · " + (idx + 1) + "/" + v.length; }
   fotos.forEach(function (f) { f.addEventListener("click", function () { mostrar(visiveis().indexOf(f)); lb.classList.add("on"); document.body.style.overflow = "hidden"; }); });
   function fechar() { lb.classList.remove("on"); document.body.style.overflow = ""; }
   lb.querySelector(".x").addEventListener("click", fechar);
